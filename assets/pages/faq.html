@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — CompuCero</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="../css/estilos.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/5610/5610074.png">
+</head>
+
+<body>
+
+    <!-- TICKER -->
+    <div class="barra-anuncio">
+        <span class="ticker">
+            <i class="fa-solid fa-truck"></i> Delivery gratis por compras mayores a S/500 &nbsp;·&nbsp;
+            <i class="fa-solid fa-bag-shopping"></i> Visítanos en nuestras tiendas en Lima &nbsp;·&nbsp;
+            <i class="fa-solid fa-fire"></i> Ofertas especiales disponibles &nbsp;·&nbsp;
+            <i class="fa-solid fa-shield-halved"></i> Compra fácil y segura &nbsp;·&nbsp;
+        </span>
+    </div>
+
+    <!-- NAVBAR -->
+    <header id="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="../../index.html">
+                    <h1>Compu<span>Cero</span></h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="ubicacion.html">Ubícanos</a></li>
+                <li><a href="faq.html" class="activo">FAQ</a></li>
+            </ul>
+            <div class="cart-icon" onclick="window.location='carrito.html'">
+                <span id="cart-count">0</span>
+                <i class="fa-solid fa-cart-shopping"></i> Carrito
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <div class="page-hero animate__animated animate__fadeIn">
+            <h2>Preguntas <span>frecuentes</span></h2>
+            <p>Resolvemos tus dudas sobre compras, envíos, garantías y soporte técnico.</p>
+        </div>
+
+        <div class="faq-wrapper">
+
+            <!-- CATEGORÍA: COMPRAS -->
+            <div class="faq-categoria">
+                <div class="faq-categoria-titulo">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <h3>Compras y pagos</h3>
+                </div>
+                <div class="faq-lista">
+                    <details class="faq-item">
+                        <summary>
+                            <span>¿Cómo realizo un pedido?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <p>Solo debes agregar los productos al carrito y presionar "Finalizar Pedido" en la sección de
+                            carrito. Te pediremos tus datos de envío y método de pago para completar la compra.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>
+                            <span>¿Cuáles son los métodos de pago?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <p>Aceptamos tarjetas de crédito y débito (Visa, Mastercard), transferencias bancarias, Yape,
+                            Plin y pagos en efectivo directamente en nuestra tienda de CompuPlaza.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>
+                            <span>¿Puedo comprar en tienda física?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <p>Sí, puedes visitarnos en CompuPlaza, Av. Garcilaso de la Vega (Wilson), Lima Centro.
+                            Atendemos de lunes a sábado de 9:00am a 7:00pm y domingos de 10:00am a 2:00pm.</p>
+                    </details>
+                </div>
+            </div>
+
+            <!-- CATEGORÍA: DELIVERY -->
+            <div class="faq-categoria">
+                <div class="faq-categoria-titulo">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <h3>Delivery y envíos</h3>
+                </div>
+                <div class="faq-lista">
+                    <details class="faq-item">
+                        <summary>
+                            <span>¿Cuánto demora el envío en Lima?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <p>Los pedidos dentro de Lima se entregan el mismo día hábil si realizas tu compra antes de las
+                            2:00pm. Fuera de ese horario, la entrega es al día hábil siguiente.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>
+                            <span>¿Hacen envíos a provincias?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <p>Sí, realizamos envíos a todo el Perú mediante Olva Courier y Shalom. El tiempo de entrega
+                            varía entre 2 a 5 días hábiles dependiendo de tu ubicación.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>
+                            <span>¿El delivery es gratis?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <p>El delivery es gratuito en Lima para compras mayores a S/500. Para compras menores o envíos a
+                            provincias, el costo varía según la dirección de entrega.</p>
+                    </details>
+                </div>
+            </div>
+
+            <!-- CATEGORÍA: GARANTÍA -->
+            <div class="faq-categoria">
+                <div class="faq-categoria-titulo">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h3>Garantía y devoluciones</h3>
+                </div>
+                <div class="faq-lista">
+                    <details class="faq-item">
+                        <summary>
+                            <span>¿Qué garantía tienen los productos?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <p>Todos nuestros componentes cuentan con 12 meses de garantía de fábrica. Algunos productos
+                            como GPU y placas madre pueden tener garantías extendidas de hasta 3 años según el
+                            fabricante.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>
+                            <span>¿Puedo devolver un producto?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <p>Tienes hasta 7 días calendario después de recibir el producto para solicitar una devolución,
+                            siempre que esté en su estado original con todos sus accesorios y empaque.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>
+                            <span>¿Cómo hago válida la garantía?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <p>Contáctanos por WhatsApp o visítanos en tienda con tu boleta de compra. Evaluamos el producto
+                            y coordinamos la reparación o reemplazo según corresponda.</p>
+                    </details>
+                </div>
+            </div>
+
+            <!-- CATEGORÍA: SOPORTE -->
+            <div class="faq-categoria">
+                <div class="faq-categoria-titulo">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    <h3>Soporte técnico</h3>
+                </div>
+                <div class="faq-lista">
+                    <details class="faq-item">
+                        <summary>
+                            <span>¿Me ayudan a elegir los componentes?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <p>¡Por supuesto! Contamos con asesores técnicos que te ayudarán a armar el PC ideal según tu
+                            presupuesto y necesidades. Puedes consultarnos por WhatsApp o en tienda.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>
+                            <span>¿Tienen servicio de armado de PC?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <p>Sí, ofrecemos el servicio de armado e instalación de sistema operativo. El costo varía según
+                            los componentes. Consulta disponibilidad en nuestra tienda.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>
+                            <span>¿Los productos son originales?</span>
+                            <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                        </summary>
+                        <p>Sí, todos nuestros productos son 100% originales y cuentan con garantía oficial del
+                            fabricante. Trabajamos directamente con distribuidores autorizados en el Perú.</p>
+                    </details>
+                </div>
+            </div>
+
+            <!-- BANNER ¿NO ENCONTRASTE TU RESPUESTA? -->
+            <div class="faq-contacto-banner">
+                <div class="faq-banner-texto">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <div>
+                        <strong>¿No encontraste lo que buscabas?</strong>
+                        <p>Escríbenos y te respondemos a la brevedad</p>
+                    </div>
+                </div>
+                <a href="contacto.html" class="btn-primario">
+                    <i class="fa-solid fa-envelope"></i> Contáctanos
+                </a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="main-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 CompuCero &nbsp;·&nbsp; Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

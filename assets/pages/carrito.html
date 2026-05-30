@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Carrito — CompuCero</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="../css/estilos.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/5610/5610074.png">
+</head>
+
+<body>
+
+    <!-- TICKER -->
+    <div class="barra-anuncio">
+        <span class="ticker">
+            <i class="fa-solid fa-truck"></i> Delivery gratis por compras mayores a S/500 &nbsp;·&nbsp;
+            <i class="fa-solid fa-bag-shopping"></i> Visítanos en nuestras tiendas en Lima &nbsp;·&nbsp;
+            <i class="fa-solid fa-fire"></i> Ofertas especiales disponibles &nbsp;·&nbsp;
+            <i class="fa-solid fa-shield-halved"></i> Compra fácil y segura &nbsp;·&nbsp;
+        </span>
+    </div>
+
+    <!-- NAVBAR -->
+    <header id="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="../../index.html">
+                    <h1>Compu<span>Cero</span></h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="ubicacion.html">Ubícanos</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+            <div class="cart-icon" onclick="window.location='carrito.html'">
+                <span id="cart-count">0</span>
+                <i class="fa-solid fa-cart-shopping"></i> Carrito
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <div class="page-hero animate__animated animate__fadeIn">
+            <h2>Tu <span>carrito</span></h2>
+            <p>Revisa tus productos antes de finalizar la compra.</p>
+        </div>
+
+        <div class="carrito-wrapper">
+
+            <!-- COLUMNA IZQUIERDA — PRODUCTOS -->
+            <div class="carrito-lista-wrapper">
+                <div class="carrito-header">
+                    <h3 class="carrito-titulo">
+                        <i class="fa-solid fa-box-open"></i> Productos
+                    </h3>
+                    <button class="btn-vaciar" id="btn-vaciar">
+                        <i class="fa-solid fa-trash"></i> Vaciar carrito
+                    </button>
+                </div>
+
+                <!-- LISTA DINÁMICA — el JS la llenará -->
+                <div id="lista-carrito">
+
+                    <!-- ESTADO VACÍO — visible cuando no hay productos -->
+                    <div class="carrito-vacio" id="carrito-vacio">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <h4>Tu carrito está vacío</h4>
+                        <p>Aún no agregaste ningún producto</p>
+                        <a href="productos.html" class="btn-primario">
+                            <i class="fa-solid fa-boxes-stacked"></i> Ver productos
+                        </a>
+                    </div>
+
+                    <!-- EJEMPLO DE ITEM — el JS generará estos dinámicamente -->
+                    <div class="item-carrito" id="item-ejemplo">
+                        <div class="item-img">
+                            <img src="../img/gpu-gigabyte-rtx5090-1.jpg" alt="RTX 5090" />
+                        </div>
+                        <div class="item-info">
+                            <h4>RTX 5090 Gigabyte Windforce 32GB</h4>
+                            <p class="item-marca">Marca: Gigabyte</p>
+                            <p class="item-precio-unit">S/. 4,999.00</p>
+                        </div>
+                        <div class="item-cantidad">
+                            <button class="btn-cantidad"><i class="fa-solid fa-minus"></i></button>
+                            <span>1</span>
+                            <button class="btn-cantidad"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div class="item-subtotal">
+                            <p>S/. 4,999.00</p>
+                        </div>
+                        <button class="btn-eliminar-item">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA — RESUMEN -->
+            <div class="carrito-resumen">
+                <h3 class="carrito-titulo">
+                    <i class="fa-solid fa-receipt"></i> Resumen del pedido
+                </h3>
+
+                <div class="resumen-lineas">
+                    <div class="resumen-linea">
+                        <span>Subtotal</span>
+                        <span id="subtotal">S/. 0.00</span>
+                    </div>
+                    <div class="resumen-linea">
+                        <span>Envío</span>
+                        <span id="costo-envio" class="envio-gratis">Gratis</span>
+                    </div>
+                    <div class="resumen-linea envio-nota">
+                        <span><i class="fa-solid fa-circle-info"></i> Gratis en compras mayores a S/500</span>
+                    </div>
+                    <div class="resumen-divider"></div>
+                    <div class="resumen-linea resumen-total">
+                        <span>Total</span>
+                        <span id="precio-total">S/. 0.00</span>
+                    </div>
+                </div>
+
+                <button class="btn-primario btn-finalizar" id="btn-finalizar">
+                    <i class="fa-solid fa-lock"></i> Finalizar pedido
+                </button>
+
+                <a href="productos.html" class="btn-secundario btn-seguir">
+                    <i class="fa-solid fa-arrow-left"></i> Seguir comprando
+                </a>
+
+                <div class="resumen-seguridad">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Compra 100% segura y protegida</span>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="main-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 CompuCero &nbsp;·&nbsp; Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

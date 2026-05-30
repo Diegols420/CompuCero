@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubícanos — CompuCero</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="../css/estilos.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/5610/5610074.png">
+</head>
+
+<body>
+
+    <!-- TICKER -->
+    <div class="barra-anuncio">
+        <span class="ticker">
+            <i class="fa-solid fa-truck"></i> Delivery gratis por compras mayores a S/500 &nbsp;·&nbsp;
+            <i class="fa-solid fa-bag-shopping"></i> Visítanos en nuestras tiendas en Lima &nbsp;·&nbsp;
+            <i class="fa-solid fa-fire"></i> Ofertas especiales disponibles &nbsp;·&nbsp;
+            <i class="fa-solid fa-shield-halved"></i> Compra fácil y segura &nbsp;·&nbsp;
+        </span>
+    </div>
+
+    <!-- NAVBAR -->
+    <header id="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="../../index.html">
+                    <h1>Compu<span>Cero</span></h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="ubicacion.html" class="activo">Ubícanos</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+            <div class="cart-icon" onclick="window.location='carrito.html'">
+                <span id="cart-count">0</span>
+                <i class="fa-solid fa-cart-shopping"></i> Carrito
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <div class="page-hero animate__animated animate__fadeIn">
+            <h2>Encuéntranos <span>aquí</span></h2>
+            <p>Visítanos en CompuPlaza, Lima. Te esperamos con el mejor hardware al mejor precio.</p>
+        </div>
+
+        <!-- MAPA + INFO -->
+        <section class="ubicacion-wrapper">
+
+            <div class="ubicacion-grid">
+
+                <!-- MAPA -->
+                <div class="map-container animate__animated animate__fadeInLeft">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d589.2204032093421!2d-77.03796366872236!3d-12.055028953036084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8c66039e27f%3A0xf87b9752d3eeb99c!2sCOMPUPLAZA!5e0!3m2!1ses-419!2spe!4v1779962213964!5m2!1ses-419!2spe"
+                        width="100%" style="border:0; height:100%; min-height:500px; display:block;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+
+                <!-- INFO -->
+                <div class="ubicacion-info animate__animated animate__fadeInRight">
+                    <h3 class="ubicacion-titulo">Información <span>de la tienda</span></h3>
+
+                    <div class="direccion-detalles">
+                        <div class="detalle-card">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div>
+                                <h4>Dirección</h4>
+                                <p>CompuPlaza</p>
+                                <p>Av. Garcilaso de la Vega (Wilson), Lima Centro</p>
+                            </div>
+                        </div>
+                        <div class="detalle-card">
+                            <i class="fa-solid fa-phone"></i>
+                            <div>
+                                <h4>Teléfono</h4>
+                                <p>(01) 548-1789</p>
+                                <p>+51 960 505 452</p>
+                            </div>
+                        </div>
+                        <div class="detalle-card">
+                            <i class="fa-solid fa-envelope"></i>
+                            <div>
+                                <h4>Correo</h4>
+                                <p>contacto@compucero.pe</p>
+                            </div>
+                        </div>
+                        <div class="detalle-card">
+                            <i class="fa-solid fa-clock"></i>
+                            <div>
+                                <h4>Horario de atención</h4>
+                                <p>Lun – Sab: 9:00am – 7:00pm</p>
+                                <p>Dom: 10:00am – 2:00pm</p>
+                            </div>
+                        </div>
+                        <div class="detalle-card">
+                            <i class="fa-solid fa-bus"></i>
+                            <div>
+                                <h4>Cómo llegar</h4>
+                                <p>Metropolitano — Estación Wilson</p>
+                                <p>Metro Línea 1 — Estación Grau</p>
+                            </div>
+                        </div>
+                        <div class="detalle-card">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <div>
+                                <h4>WhatsApp</h4>
+                                <p>+51 960 505 452</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://www.google.com/maps?q=-12.055028,-77.037963" target="_blank" class="btn-primario"
+                        style="margin-top: 24px; display: inline-flex;">
+                        <i class="fa-solid fa-diamond-turn-right"></i> Cómo llegar
+                    </a>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="main-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 CompuCero &nbsp;·&nbsp; Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

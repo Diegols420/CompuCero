@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos — CompuCero</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="../css/estilos.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/5610/5610074.png">
+</head>
+
+<body>
+
+    <!-- TICKER -->
+    <div class="barra-anuncio">
+        <span class="ticker">
+            <i class="fa-solid fa-truck"></i> Delivery gratis por compras mayores a S/500 &nbsp;·&nbsp;
+            <i class="fa-solid fa-bag-shopping"></i> Visítanos en nuestras tiendas en Lima &nbsp;·&nbsp;
+            <i class="fa-solid fa-fire"></i> Ofertas especiales disponibles &nbsp;·&nbsp;
+            <i class="fa-solid fa-shield-halved"></i> Compra fácil y segura &nbsp;·&nbsp;
+        </span>
+    </div>
+
+    <!-- NAVBAR -->
+    <header id="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="../../index.html">
+                    <h1>Compu<span>Cero</span></h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="productos.html" class="activo">Productos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="ubicacion.html">Ubícanos</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+            <div class="cart-icon" onclick="window.location='carrito.html'">
+                <span id="cart-count">0</span>
+                <i class="fa-solid fa-cart-shopping"></i> Carrito
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <div class="page-hero animate__animated animate__fadeIn">
+            <h2>Nuestros <span>productos</span></h2>
+            <p>Hardware de alta gama al mejor precio en Lima. Componentes para armar tu PC ideal.</p>
+        </div>
+
+        <!-- ════════════════════════════════
+             FILTROS — FLEXBOX: display:flex, flex-wrap:wrap
+             ════════════════════════════════ -->
+        <!-- FLEXBOX aplicado a .filtros-inner -->
+        <div class="filtros-wrapper">
+            <div class="filtros-inner">
+                <button class="filtro-btn activo" data-categoria="todos">
+                    <i class="fa-solid fa-border-all"></i> Todos
+                </button>
+                <button class="filtro-btn" data-categoria="gpu">
+                    <i class="fa-solid fa-display"></i> GPU
+                </button>
+                <button class="filtro-btn" data-categoria="placa">
+                    <i class="fa-solid fa-microchip"></i> Placas madre
+                </button>
+                <button class="filtro-btn" data-categoria="fuente">
+                    <i class="fa-solid fa-plug"></i> Fuentes
+                </button>
+                <button class="filtro-btn" data-categoria="ram">
+                    <i class="fa-solid fa-memory"></i> RAM
+                </button>
+                <button class="filtro-btn" data-categoria="procesador">
+                    <i class="fa-solid fa-bolt"></i> Procesadores
+                </button>
+                <button class="filtro-btn" data-categoria="periferico">
+                    <i class="fa-solid fa-computer-mouse"></i> Periféricos
+                </button>
+                <button class="filtro-btn" data-categoria="almacenamiento">
+                    <i class="fa-solid fa-hard-drive"></i> Almacenamiento
+                </button>
+                <button class="filtro-btn" data-categoria="refrigeracion">
+                    <i class="fa-solid fa-fan"></i> Refrigeración
+                </button>
+                <button class="filtro-btn" data-categoria="gabinete">
+                    <i class="fa-solid fa-server"></i> Gabinetes
+                </button>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════
+             CATÁLOGO — CSS GRID
+             grid-template-columns: repeat(4, 1fr)
+             justify-items: stretch, align-items: start
+             ════════════════════════════════ -->
+        <section class="catalogo-section">
+            <div class="catalogo-grid">
+
+                <!-- GPU -->
+                <article class="producto" data-categoria="gpu">
+                    <div class="producto-img-wrapper">
+                        <img src="../img/gpu-gigabyte-rtx5090-1.jpg" alt="RTX 5090 Gigabyte" />
+                    </div>
+                    <div class="producto-body">
+                        <span class="producto-categoria">GPU</span>
+                        <h3 class="titulo">RTX 5090 Gigabyte Windforce 32GB</h3>
+                        <p class="descripcion">Marca: Gigabyte · GDDR7 512bits</p>
+                        <p class="precio">S/. 4,999.00</p>
+                        <button class="btn-agregar">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+                <!-- PLACAS MADRE -->
+                <article class="producto" data-categoria="placa">
+                    <div class="producto-img-wrapper">
+                        <img src="../img/placa-asus-rog-b650-1.jpg" alt="Placa ASUS ROG B650" />
+                    </div>
+                    <div class="producto-body">
+                        <span class="producto-categoria">Placa madre</span>
+                        <h3 class="titulo">ASUS ROG STRIX B650-A Gaming WiFi ATX</h3>
+                        <p class="descripcion">Marca: ASUS · DDR5 · AMD AM5</p>
+                        <p class="precio">S/. 1,299.00</p>
+                        <button class="btn-agregar">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+                <article class="producto" data-categoria="placa">
+                    <div class="producto-img-wrapper">
+                        <img src="../img/placa-asus-rog-b650e-wifi.jpg" alt="Placa ASUS ROG B650E WiFi" />
+                    </div>
+                    <div class="producto-body">
+                        <span class="producto-categoria">Placa madre</span>
+                        <h3 class="titulo">ASUS ROG STRIX B650E-F Gaming WiFi ATX</h3>
+                        <p class="descripcion">Marca: ASUS · DDR5 · AMD AM5</p>
+                        <p class="precio">S/. 1,599.00</p>
+                        <button class="btn-agregar">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+                <!-- FUENTES -->
+                <article class="producto" data-categoria="fuente">
+                    <div class="producto-img-wrapper">
+                        <img src="../img/fuente-asus-prime-850w-1.jpg" alt="Fuente ASUS Prime 850W" />
+                    </div>
+                    <div class="producto-body">
+                        <span class="producto-categoria">Fuente de poder</span>
+                        <h3 class="titulo">ASUS Prime 850W 80 Plus Gold Full Modular</h3>
+                        <p class="descripcion">Marca: ASUS · 850W · Blanca</p>
+                        <p class="precio">S/. 319.00</p>
+                        <button class="btn-agregar">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+                <article class="producto" data-categoria="fuente">
+                    <div class="producto-img-wrapper">
+                        <img src="../img/fuente-asrock-750w-1.jpg" alt="Fuente ASRock Challenger 750W" />
+                    </div>
+                    <div class="producto-body">
+                        <span class="producto-categoria">Fuente de poder</span>
+                        <h3 class="titulo">ASRock Challenger 750W 80 Plus Bronze</h3>
+                        <p class="descripcion">Marca: ASRock · 750W · Negro</p>
+                        <p class="precio">S/. 239.00</p>
+                        <button class="btn-agregar">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+                <article class="producto" data-categoria="fuente">
+                    <div class="producto-img-wrapper">
+                        <img src="../img/fuente-antryx-600w-1.jpg" alt="Fuente Antryx 600W" />
+                    </div>
+                    <div class="producto-body">
+                        <span class="producto-categoria">Fuente de poder</span>
+                        <h3 class="titulo">Antryx B600 V3 600W ATX v2.31</h3>
+                        <p class="descripcion">Marca: Antryx · 600W · Negro</p>
+                        <p class="precio">S/. 189.00</p>
+                        <button class="btn-agregar">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+                <!-- PROCESADORES -->
+                <article class="producto" data-categoria="procesador">
+                    <div class="producto-img-wrapper">
+                        <img src="../img/procesador-intel-i7.jpg" alt="Intel Core i7" />
+                    </div>
+                    <div class="producto-body">
+                        <span class="producto-categoria">Procesador</span>
+                        <h3 class="titulo">Intel Core i7 LGA1700</h3>
+                        <p class="descripcion">Marca: Intel · Socket LGA1700</p>
+                        <p class="precio">S/. 1,199.00</p>
+                        <button class="btn-agregar">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+                <!-- RAM -->
+                <article class="producto" data-categoria="ram">
+                    <div class="producto-img-wrapper">
+                        <img src="../img/ram-ddr4.jpg" alt="RAM DDR4" />
+                    </div>
+                    <div class="producto-body">
+                        <span class="producto-categoria">Memoria RAM</span>
+                        <h3 class="titulo">Memoria RAM DDR4 16GB 3200MHz</h3>
+                        <p class="descripcion">Tipo: DDR4 · 16GB · 3200MHz</p>
+                        <p class="precio">S/. 149.00</p>
+                        <button class="btn-agregar">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+                <!-- ALMACENAMIENTO -->
+                <article class="producto" data-categoria="almacenamiento">
+                    <div class="producto-img-wrapper">
+                        <img src="../img/ssd-1tb.jpg" alt="SSD 1TB" />
+                    </div>
+                    <div class="producto-body">
+                        <span class="producto-categoria">Almacenamiento</span>
+                        <h3 class="titulo">SSD NVMe 1TB M.2 PCIe Gen4</h3>
+                        <p class="descripcion">Tipo: NVMe · 1TB · M.2</p>
+                        <p class="precio">S/. 299.00</p>
+                        <button class="btn-agregar">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+                <!-- REFRIGERACIÓN -->
+                <article class="producto" data-categoria="refrigeracion">
+                    <div class="producto-img-wrapper">
+                        <img src="../img/cooler-cpu.jpg" alt="Cooler CPU" />
+                    </div>
+                    <div class="producto-body">
+                        <span class="producto-categoria">Refrigeración</span>
+                        <h3 class="titulo">Cooler CPU Torre Doble Fan 120mm</h3>
+                        <p class="descripcion">Compatible: Intel & AMD · 120mm</p>
+                        <p class="precio">S/. 129.00</p>
+                        <button class="btn-agregar">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+                <!-- GABINETE -->
+                <article class="producto" data-categoria="gabinete">
+                    <div class="producto-img-wrapper">
+                        <img src="../img/gabinete-gamer.jpg" alt="Gabinete Gamer" />
+                    </div>
+                    <div class="producto-body">
+                        <span class="producto-categoria">Gabinete</span>
+                        <h3 class="titulo">Gabinete Gamer Mid Tower ATX Panel Vidrio</h3>
+                        <p class="descripcion">Formato: Mid Tower · ATX · Panel de vidrio</p>
+                        <p class="precio">S/. 249.00</p>
+                        <button class="btn-agregar">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+                <!-- PERIFÉRICOS -->
+                <article class="producto" data-categoria="periferico">
+                    <div class="producto-img-wrapper">
+                        <img src="../img/monitor-asus-tuf-curvo.jpg" alt="Monitor ASUS TUF Gaming" />
+                    </div>
+                    <div class="producto-body">
+                        <span class="producto-categoria">Monitor</span>
+                        <h3 class="titulo">Monitor ASUS TUF Gaming 34" Curvo WQHD</h3>
+                        <p class="descripcion">Marca: ASUS · 34" · 3440x1440</p>
+                        <p class="precio">S/. 1,499.00</p>
+                        <button class="btn-agregar">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+                <article class="producto" data-categoria="periferico">
+                    <div class="producto-img-wrapper">
+                        <img src="../img/mouse-logitech-m90.jpg" alt="Mouse Logitech M90" />
+                    </div>
+                    <div class="producto-body">
+                        <span class="producto-categoria">Mouse</span>
+                        <h3 class="titulo">Mouse Logitech M90 Dark Midnight 1000 DPI</h3>
+                        <p class="descripcion">Marca: Logitech · USB · Windows & Mac</p>
+                        <p class="precio">S/. 39.90</p>
+                        <button class="btn-agregar">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+                <article class="producto" data-categoria="periferico">
+                    <div class="producto-img-wrapper">
+                        <img src="../img/teclado-gaming.jpg" alt="Teclado Gaming" />
+                    </div>
+                    <div class="producto-body">
+                        <span class="producto-categoria">Teclado</span>
+                        <h3 class="titulo">Teclado Gaming Mecánico RGB TKL</h3>
+                        <p class="descripcion">Tipo: Mecánico · RGB · TKL</p>
+                        <p class="precio">S/. 189.00</p>
+                        <button class="btn-agregar">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="main-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 CompuCero &nbsp;&middot;&nbsp; Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

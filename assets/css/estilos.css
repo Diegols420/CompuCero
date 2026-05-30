@@ -1,0 +1,2182 @@
+/* ============================================================
+   estilos.css — CompuCero Hardware Store
+   Proyecto Final — Taller Web
+   ============================================================
+   ÍNDICE DE CONTENIDOS:
+   01. Variables CSS
+   02. Reset y Base
+   03. Tipografía (2 fuentes diferentes: Barlow Condensed + Inter)
+   04. Animaciones CSS (transition, transform, keyframes)
+   05. Ticker / Barra de anuncio
+   06. NAVBAR — Flexbox
+   07. HERO — CSS Grid (grid-template-columns, gap, align-items)
+   08. BENEFICIOS — CSS Grid con repeat()
+   09. CATEGORÍAS — CSS Grid con auto-fill y minmax()
+   10. MÁS VENDIDOS — CSS Grid con auto-fit y minmax()
+   11. BANNER PROMO — Flexbox
+   12. FOOTER — Flexbox
+   13. PRODUCTOS — CSS Grid con repeat() y alineaciones Grid
+   14. NOSOTROS — CSS Grid y Flexbox
+   15. CONTACTO — CSS Grid y Flexbox
+   16. UBICACIÓN — CSS Grid
+   17. FAQ — Flexbox
+   18. CARRITO — CSS Grid
+   19. MEDIA QUERIES — Responsive Web Design
+   ============================================================ */
+
+
+/* ============================================================
+   01. VARIABLES CSS
+   Colores, tipografías y valores reutilizables del proyecto
+   ============================================================ */
+:root {
+    /* ── TIPOGRAFÍAS: Se usan 2 fuentes distintas (requisito) ── */
+    --font-primary:   'Barlow Condensed', sans-serif; /* Fuente 1: Display / títulos */
+    --font-secondary: 'Inter', sans-serif;            /* Fuente 2: Texto corrido / body */
+
+    /* ── PALETA DE COLORES ── */
+    --negro:   #0a0a0a;
+    --oscuro:  #111318;
+    --panel:   #1a1d24;
+    --borde:   #2a2d36;
+    --acento:  #00d4ff;   /* Cian — color principal de marca */
+    --acento2: #ff6b00;   /* Naranja — color secundario */
+    --texto:   #e8eaf0;
+    --muted:   #7a7f8e;
+    --blanco:  #ffffff;
+
+    /* ── ALIAS PARA COMPATIBILIDAD CON PÁGINAS INTERNAS ── */
+    --primary-color: #2c3e50;
+    --accent-color:  #e74c3c;
+    --light-bg:      #f4f4f4;
+}
+
+
+/* ============================================================
+   02. RESET Y BASE
+   Elimina márgenes/paddings por defecto del navegador
+   ============================================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth; /* Scroll suave al hacer click en anclas */
+}
+
+/* ── TIPOGRAFÍA BASE: usa fuente secundaria (Inter) ── */
+body {
+    font-family: var(--font-secondary); /* FUENTE 2: Inter */
+    font-size: 16px;
+    line-height: 1.6;
+    background-color: var(--negro);
+    color: var(--texto);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* ============================================================
+   03. ICONOS (Font Awesome)
+   ============================================================ */
+i.fa-solid, i.fa-brands, i.fa-regular { line-height: 1; }
+
+.btn-primario i,
+.btn-secundario i,
+.btn-carrito i,
+.btn-agregar i,
+.btn-enviar i { margin-right: 6px; }
+
+.barra-anuncio i { margin-right: 4px; font-size: 12px; }
+.cart-icon i    { font-size: 16px; color: var(--acento); }
+
+.beneficio-icono {
+    font-size: 22px;
+    color: var(--acento);
+    flex-shrink: 0;
+    width: 28px;
+    text-align: center;
+}
+
+.cat-icono i   { font-size: 20px; color: var(--acento); }
+
+.footer-col a i {
+    width: 16px;
+    margin-right: 8px;
+    color: var(--muted);
+    /* ANIMACIÓN: transition en ícono del footer */
+    transition: color 0.2s ease;
+}
+.footer-col a:hover i { color: var(--acento); }
+
+/* Redes sociales del footer */
+.footer-social {
+    /* FLEXBOX: alinea íconos sociales en fila */
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+.footer-social a {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--borde);
+    /* FLEXBOX: centra el ícono dentro del círculo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    /* ANIMACIÓN: transition en redes sociales */
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.footer-social a:hover {
+    border-color: var(--acento);
+    color: var(--acento);
+    background: rgba(0, 212, 255, 0.08);
+}
+.footer-social i { font-size: 16px; }
+.footer-heart    { color: var(--acento); font-size: 13px; margin: 0 2px; }
+
+
+/* ============================================================
+   04. ANIMACIONES CSS
+   Se definen aquí los @keyframes y transitions del proyecto
+   REQUISITOS CUBIERTOS: transition, transform, hover, scale, rotate
+   ============================================================ */
+
+/* ── Keyframe: ticker de anuncios ── */
+@keyframes ticker {
+    from { transform: translateX(100vw); }
+    to   { transform: translateX(-100%); }
+}
+
+/* ── Keyframe: entrada de tarjetas ── */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(30px);  /* transform: mueve hacia abajo al inicio */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);     /* vuelve a posición normal */
+    }
+}
+
+/* ── Keyframe: pulso del badge del hero ── */
+@keyframes pulso {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.4); }
+    50%       { box-shadow: 0 0 0 10px rgba(0, 212, 255, 0); }
+}
+
+/* ── Keyframe: rotación de ícono en hover ── */
+@keyframes girar {
+    from { transform: rotate(0deg); }   /* transform: rotate() */
+    to   { transform: rotate(360deg); }
+}
+
+/* ── Keyframe: entrada desde izquierda ── */
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-40px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Keyframe: brillo del botón primario ── */
+@keyframes brillar {
+    0%   { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+
+/* ============================================================
+   05. TICKER / BARRA DE ANUNCIO
+   ============================================================ */
+.barra-anuncio {
+    background: var(--acento);
+    color: var(--negro);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 8px 0;
+}
+
+.ticker {
+    display: inline-block;
+    /* ANIMACIÓN: el texto se mueve de derecha a izquierda */
+    animation: ticker 28s linear infinite;
+}
+
+
+/* ============================================================
+   06. NAVBAR
+   FLEXBOX: display flex, justify-content, align-items
+   ============================================================ */
+#main-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 10, 10, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--borde);
+}
+
+/* ── FLEXBOX aplicado al navbar ──
+   Distribuye logo, links y carrito en una fila horizontal */
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 64px;
+
+    /* === FLEXBOX === */
+    display: flex;              /* Activa el modelo Flexbox */
+    align-items: center;        /* Centra verticalmente todos los elementos */
+    gap: 40px;                  /* Espacio entre logo, links y carrito */
+}
+
+/* ── TIPOGRAFÍA: FUENTE 1 (Barlow Condensed) en el logo ── */
+.logo h1 {
+    font-family: var(--font-primary); /* FUENTE PRIMARIA: Barlow Condensed */
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--blanco);
+}
+.logo h1 span { color: var(--acento); }
+.logo a { text-decoration: none; }
+
+/* ── FLEXBOX: los links del nav en fila horizontal ── */
+.nav-links {
+    display: flex;              /* Links del menú en fila */
+    list-style: none;
+    gap: 8px;
+    margin-left: auto;          /* Empuja los links hacia la derecha */
+}
+
+.nav-links a {
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    border-radius: 6px;
+    /* ANIMACIÓN: transition suave en color y fondo */
+    transition: color 0.2s ease, background 0.2s ease;
+}
+.nav-links a:hover { color: var(--blanco); background: var(--panel); }
+.nav-links a.activo { color: var(--acento); }
+
+/* ── FLEXBOX: ícono del carrito ── */
+.cart-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    /* ANIMACIÓN: transition en borde y fondo */
+    transition: border-color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+}
+.cart-icon:hover { border-color: var(--acento); background: #0a1a1f; }
+
+#cart-count {
+    background: var(--acento2);
+    color: var(--blanco);
+    font-size: 11px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    /* FLEXBOX: centra el número dentro del badge */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ============================================================
+   07. HERO — CSS GRID
+   GRID: grid-template-columns, gap, align-items
+   ============================================================ */
+
+/* === CSS GRID APLICADO AL HERO ===
+   Divide la sección en 2 columnas iguales:
+   columna izquierda = texto, columna derecha = imagen */
+#hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px 72px;
+
+    /* === CSS GRID === */
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* 2 columnas de igual tamaño */
+    gap: 48px;                        /* Espacio entre columnas */
+    align-items: center;              /* Alineación vertical: centra el contenido */
+}
+
+/* ── TIPOGRAFÍA: FUENTE 1 (Barlow Condensed) en títulos hero ── */
+.hero-texto h2 {
+    font-family: var(--font-primary); /* FUENTE PRIMARIA */
+    font-size: clamp(48px, 6vw, 80px); /* Tamaño fluido responsive */
+    font-weight: 900;
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: var(--blanco);
+    margin-bottom: 20px;
+    /* ANIMACIÓN: entrada desde la izquierda */
+    animation: slideInLeft 0.8s ease both;
+}
+.hero-texto h2 em { font-style: normal; color: var(--acento); display: block; }
+
+.hero-texto p {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 400px;
+    margin-bottom: 32px;
+}
+
+/* ── FLEXBOX: botones del hero en fila ── */
+.hero-botones {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;  /* En móvil se apilan verticalmente */
+}
+
+.hero-imagen {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--borde);
+    aspect-ratio: 4/3;
+    background: var(--panel);
+    /* FLEXBOX: centra la imagen dentro del contenedor */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* ANIMACIÓN: transition en hover */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.hero-imagen:hover {
+    border-color: var(--acento);
+    box-shadow: 0 0 40px rgba(0, 212, 255, 0.15);
+}
+
+.hero-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    /* ANIMACIÓN: zoom suave en hover */
+    transition: transform 0.5s ease, opacity 0.3s ease;
+}
+.hero-imagen:hover img {
+    transform: scale(1.04); /* ANIMACIÓN: scale en hover */
+    opacity: 1;
+}
+
+.hero-badge {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: rgba(10, 10, 10, 0.85);
+    border: 1px solid var(--acento);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px;
+    /* ANIMACIÓN: pulso continuo */
+    animation: pulso 2.5s ease-in-out infinite;
+}
+.hero-badge strong {
+    color: var(--acento);
+    font-size: 18px;
+    display: block;
+}
+
+
+/* ============================================================
+   BOTONES GLOBALES
+   ANIMACIÓN: transition, transform en hover
+   ============================================================ */
+.btn-primario {
+    background: var(--acento);
+    color: var(--negro);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    /* ANIMACIÓN: transition en botón primario */
+    transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn-primario:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);           /* ANIMACIÓN: sube al hacer hover */
+    box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
+}
+.btn-primario:active {
+    transform: translateY(0) scale(0.98); /* ANIMACIÓN: escala al hacer click */
+}
+
+.btn-secundario {
+    background: transparent;
+    color: var(--texto);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    padding: 14px 28px;
+    border-radius: 8px;
+    border: 1px solid var(--borde);
+    cursor: pointer;
+    /* ANIMACIÓN: transition en botón secundario */
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn-secundario:hover {
+    border-color: var(--acento);
+    color: var(--acento);
+    transform: translateY(-2px); /* ANIMACIÓN: sube al hacer hover */
+}
+
+
+/* ============================================================
+   08. BENEFICIOS — CSS GRID con repeat()
+   GRID: display grid, grid-template-columns, repeat()
+   ============================================================ */
+.beneficios {
+    background: var(--panel);
+    border-top: 1px solid var(--borde);
+    border-bottom: 1px solid var(--borde);
+}
+
+/* === CSS GRID en la barra de beneficios ===
+   4 columnas iguales usando repeat() */
+.beneficios-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+
+    /* === CSS GRID === */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);  /* repeat(): 4 columnas iguales */
+
+    /* === ALINEACIONES DE GRID === */
+    justify-items: stretch;  /* Cada celda ocupa todo el ancho */
+    align-items: center;     /* Centra verticalmente el contenido */
+}
+
+/* ── FLEXBOX dentro de cada beneficio (ícono + texto) ── */
+.beneficio-item {
+    display: flex;          /* Flexbox para alinear ícono y texto */
+    align-items: center;    /* Centra verticalmente ícono y texto */
+    gap: 14px;
+    padding: 16px 24px;
+    border-right: 1px solid var(--borde);
+    /* ANIMACIÓN: transition en hover */
+    transition: background 0.2s ease;
+}
+.beneficio-item:last-child { border-right: none; }
+.beneficio-item:hover { background: rgba(0, 212, 255, 0.04); }
+
+.beneficio-texto strong { display: block; font-size: 14px; color: var(--blanco); }
+.beneficio-texto span   { font-size: 12px; color: var(--muted); }
+
+
+/* ============================================================
+   TÍTULOS DE SECCIÓN — TIPOGRAFÍA (Barlow Condensed)
+   ============================================================ */
+.seccion-titulo {
+    font-family: var(--font-primary); /* FUENTE PRIMARIA: Barlow Condensed */
+    font-size: 36px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--blanco);
+    margin-bottom: 8px;
+}
+.seccion-titulo span { color: var(--acento); }
+.seccion-titulo i    { color: var(--acento2); margin-right: 8px; }
+.seccion-subtitulo   { color: var(--muted); font-size: 15px; margin-bottom: 32px; }
+
+
+/* ============================================================
+   09. CATEGORÍAS — CSS GRID con auto-fill y minmax()
+   GRID: auto-fill, minmax(), grid-template-columns
+   ============================================================ */
+.categorias {
+    max-width: 1200px;
+    margin: 72px auto;
+    padding: 0 24px;
+}
+
+/* === CSS GRID con AUTO-FILL y MINMAX() ===
+   auto-fill: crea tantas columnas como quepan en el contenedor
+   minmax(240px, 1fr): cada columna tiene mínimo 240px, máximo 1fr
+   → En pantallas grandes: 3 columnas
+   → En pantallas pequeñas: 2 o 1 columna automáticamente */
+.grid-categorias {
+    /* === CSS GRID === */
+    display: grid;
+
+    /* === AUTO-FILL + MINMAX() ===
+       Explicación: El grid crea columnas automáticamente.
+       Cada columna tiene mínimo 240px y máximo 1fr (fracción del espacio).
+       Diferencia con auto-fit: auto-fill mantiene las columnas vacías,
+       auto-fit las colapsa. Aquí usamos auto-fill. */
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+
+    gap: 16px;
+
+    /* === ALINEACIONES DE GRID === */
+    justify-items: stretch;    /* Las celdas se estiran horizontalmente */
+    align-items: stretch;      /* Las celdas se estiran verticalmente */
+    justify-content: start;    /* El grid comienza desde la izquierda */
+    align-content: start;      /* El grid comienza desde arriba */
+}
+
+/* ── Tarjeta de categoría ── */
+.cat-card {
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 24px;
+    /* FLEXBOX: ícono + texto en fila */
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    /* ANIMACIÓN: transition en hover de categoría */
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    color: inherit;
+}
+.cat-card:hover {
+    border-color: var(--acento);
+    transform: translateY(-4px);          /* ANIMACIÓN: sube al hacer hover */
+    box-shadow: 0 12px 32px rgba(0, 212, 255, 0.12);
+}
+
+/* ANIMACIÓN: el ícono rota en hover */
+.cat-card:hover .cat-icono i {
+    color: var(--blanco);
+    transform: rotate(15deg); /* ANIMACIÓN: rotate en hover del ícono */
+}
+
+.cat-icono {
+    width: 48px;
+    height: 48px;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 10px;
+    /* FLEXBOX: centra el ícono */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    /* ANIMACIÓN: transition en fondo del ícono */
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+.cat-card:hover .cat-icono { background: var(--acento); }
+
+.cat-icono i {
+    /* ANIMACIÓN: transition en ícono */
+    transition: color 0.2s ease, transform 0.3s ease;
+}
+
+.cat-info strong { display: block; font-size: 15px; color: var(--blanco); margin-bottom: 2px; }
+.cat-info span   { font-size: 12px; color: var(--muted); }
+
+
+/* ============================================================
+   10. MÁS VENDIDOS — CSS GRID con auto-fit y minmax()
+   GRID: auto-fit, minmax(), diferencia con auto-fill
+   ============================================================ */
+.mas-vendidos {
+    max-width: 1200px;
+    margin: 0 auto 72px;
+    padding: 0 24px;
+}
+
+/* === CSS GRID con AUTO-FIT y MINMAX() ===
+   auto-fit: a diferencia de auto-fill, colapsa las columnas vacías
+   y estira las columnas existentes para llenar el espacio.
+   Resultado visual: si hay 3 productos, se distribuyen equitativamente.
+   Si hubiera 1 producto, ocuparía todo el ancho. */
+.contenedor-vendidos {
+    /* === CSS GRID === */
+    display: grid;
+
+    /* === AUTO-FIT + MINMAX() ===
+       Diferencia clave con auto-fill:
+       · auto-fill: mantiene columnas vacías (el grid no se expande)
+       · auto-fit: colapsa columnas vacías (las existentes se expanden)
+       Aquí usamos auto-fit para que los productos ocupen todo el ancho */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 20px;
+
+    /* === ALINEACIONES DE GRID (justify-items, align-items) === */
+    justify-items: stretch;    /* Las tarjetas se estiran al ancho de la celda */
+    align-items: start;        /* Las tarjetas se alinean desde arriba */
+}
+
+/* ── Tarjeta de producto más vendido ── */
+.card-vendido {
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    overflow: hidden;
+    /* ANIMACIÓN: transition + animación de entrada */
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    animation: aparecer 0.6s ease both;
+    display: flex;
+    flex-direction: column;
+}
+.card-vendido:hover {
+    border-color: var(--acento);
+    transform: translateY(-6px);  /* ANIMACIÓN: sube al hacer hover */
+    box-shadow: 0 16px 40px rgba(0, 212, 255, 0.15);
+}
+
+/* ANIMACIÓN CON DELAY: las tarjetas aparecen en secuencia */
+.card-vendido:nth-child(1) { animation-delay: 0s; }
+.card-vendido:nth-child(2) { animation-delay: 0.15s; }
+.card-vendido:nth-child(3) { animation-delay: 0.3s; }
+
+.card-vendido .img-wrapper {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: #0f1115;
+}
+.card-vendido img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* ANIMACIÓN: zoom suave en hover */
+    transition: transform 0.4s ease;
+}
+.card-vendido:hover img {
+    transform: scale(1.06); /* ANIMACIÓN: scale(zoom) en hover */
+}
+
+.card-body { padding: 16px; display: flex; flex-direction: column; flex: 1; }
+.card-body h3   { font-size: 15px; font-weight: 600; color: var(--blanco); margin-bottom: 4px; }
+.card-body .precio { font-size: 20px; font-weight: 700; color: var(--acento); margin-bottom: 14px; }
+
+/* ── Botón agregar al carrito ── */
+.btn-carrito {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--borde);
+    color: var(--texto);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    /* ANIMACIÓN: transition en botón carrito */
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: auto;
+}
+.btn-carrito:hover {
+    background: var(--acento);
+    border-color: var(--acento);
+    color: var(--negro);
+    transform: scale(1.02); /* ANIMACIÓN: pequeño agrandamiento */
+}
+
+
+/* ============================================================
+   11. BANNER PROMO — FLEXBOX
+   FLEXBOX: justify-content space-between, align-items center
+   ============================================================ */
+.banner-promo {
+    background: linear-gradient(135deg, #0a1a1f 0%, #0d1520 100%);
+    border-top: 1px solid var(--borde);
+    border-bottom: 1px solid var(--borde);
+    margin-bottom: 72px;
+}
+
+/* === FLEXBOX en el banner promocional ===
+   Distribuye el texto a la izquierda y el botón a la derecha */
+.banner-promo-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 24px;
+
+    /* === FLEXBOX === */
+    display: flex;
+    align-items: center;               /* Centra verticalmente texto y botón */
+    justify-content: space-between;    /* Texto a la izquierda, botón a la derecha */
+    gap: 32px;
+}
+
+.promo-texto h3 {
+    font-family: var(--font-primary); /* FUENTE PRIMARIA */
+    font-size: 40px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--blanco);
+    margin-bottom: 8px;
+}
+.promo-texto h3 span { color: var(--acento2); }
+.promo-texto p       { color: var(--muted); font-size: 15px; }
+
+
+/* ============================================================
+   12. FOOTER — FLEXBOX
+   ============================================================ */
+#main-footer {
+    background: var(--oscuro);
+    border-top: 1px solid var(--borde);
+}
+
+/* === FLEXBOX en el footer ===
+   Centra el texto de copyright */
+.footer-bottom {
+    padding: 24px;
+    /* FLEXBOX */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-bottom p {
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+    width: 100%;
+}
+
+
+/* ============================================================
+   PAGE HERO (páginas internas)
+   ============================================================ */
+.page-hero {
+    background: linear-gradient(135deg, #0a1a1f 0%, #0d1520 100%);
+    border-bottom: 1px solid var(--borde);
+    padding: 64px 24px;
+    text-align: center;
+}
+.page-hero h2 {
+    font-family: var(--font-primary); /* FUENTE PRIMARIA */
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--blanco);
+    margin-bottom: 12px;
+    animation: aparecer 0.7s ease both;
+}
+.page-hero h2 span { color: var(--acento); }
+.page-hero p { color: var(--muted); font-size: 16px; max-width: 500px; margin: 0 auto; }
+
+
+/* ============================================================
+   13. PRODUCTOS — CSS GRID AVANZADO
+   GRID: grid-template-columns, repeat(), minmax(), alineaciones
+   ============================================================ */
+
+/* ── Filtros de productos ── */
+.filtros-wrapper {
+    background: var(--panel);
+    border-bottom: 1px solid var(--borde);
+    padding: 16px 24px;
+    position: sticky;
+    top: 64px;
+    z-index: 90;
+}
+
+/* === FLEXBOX en la barra de filtros ===
+   Los botones de filtro se distribuyen en fila con wrap */
+.filtros-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    /* FLEXBOX */
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;     /* flex-wrap: los botones pasan a la siguiente fila si no caben */
+    align-items: center;
+}
+
+.filtro-btn {
+    background: transparent;
+    border: 1px solid var(--borde);
+    color: var(--muted);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    /* ANIMACIÓN: transition en botones de filtro */
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+.filtro-btn:hover {
+    border-color: var(--acento);
+    color: var(--acento);
+    transform: translateY(-1px); /* ANIMACIÓN: sube levemente */
+}
+.filtro-btn.activo {
+    background: var(--acento);
+    border-color: var(--acento);
+    color: var(--negro);
+    font-weight: 700;
+}
+.filtro-btn i { font-size: 12px; }
+
+/* ── Sección catálogo ── */
+.catalogo-section {
+    max-width: 1200px;
+    margin: 48px auto 72px;
+    padding: 0 24px;
+}
+
+/* === CSS GRID en el catálogo de productos ===
+   Usa grid-template-columns con repeat() y alineaciones de grid */
+.catalogo-grid {
+    /* === CSS GRID === */
+    display: grid;
+
+    /* grid-template-columns con repeat(): 4 columnas iguales */
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+
+    /* === ALINEACIONES DE GRID ===
+       Estas propiedades controlan cómo se alinean las celdas
+       dentro del contenedor grid */
+    justify-items: stretch;    /* Cada producto ocupa todo el ancho de su celda */
+    align-items: start;        /* Los productos se alinean desde arriba */
+    justify-content: start;    /* El grid comienza desde la izquierda del contenedor */
+    align-content: start;      /* Las filas comienzan desde arriba del contenedor */
+}
+
+/* ── Tarjeta de producto ── */
+.producto {
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    overflow: hidden;
+    /* ANIMACIÓN: transition en tarjeta de producto */
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    /* FLEXBOX dentro de la tarjeta */
+    display: flex;
+    flex-direction: column;   /* flex-direction: column para apilar imagen y cuerpo */
+
+    /* === ALINEACIÓN DE GRID INDIVIDUAL ===
+       justify-self y align-self controlan la alineación de cada elemento
+       dentro de su celda individualmente */
+    justify-self: stretch;    /* Se estira al ancho de su celda */
+    align-self: start;        /* Se alinea al inicio de su celda */
+}
+.producto:hover {
+    border-color: var(--acento);
+    transform: translateY(-4px);  /* ANIMACIÓN: sube al hacer hover */
+    box-shadow: 0 12px 32px rgba(0, 212, 255, 0.15);
+}
+
+.producto-img-wrapper {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background: #0f1115;
+}
+.producto-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* ANIMACIÓN: zoom en hover */
+    transition: transform 0.4s ease;
+}
+.producto:hover .producto-img-wrapper img {
+    transform: scale(1.07); /* ANIMACIÓN: scale / zoom */
+}
+
+.producto-body {
+    padding: 16px;
+    /* FLEXBOX dentro del cuerpo de la tarjeta */
+    display: flex;
+    flex-direction: column;
+    flex: 1;                  /* Se expande para llenar el espacio disponible */
+}
+
+.producto-categoria {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--acento);
+    margin-bottom: 6px;
+    display: block;
+}
+.producto .titulo      { font-size: 13px; font-weight: 600; color: var(--blanco); line-height: 1.4; margin-bottom: 4px; flex: 1; }
+.producto .descripcion { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+.producto .precio      { font-size: 18px; font-weight: 700; color: var(--acento); margin-bottom: 12px; }
+
+/* Elimina el text-align center heredado del CSS antiguo */
+.producto p { text-align: left; }
+.producto h2 { text-align: left; }
+
+.btn-agregar {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--borde);
+    color: var(--texto);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    /* ANIMACIÓN: transition en botón agregar */
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: auto;
+}
+.btn-agregar:hover {
+    background: var(--acento);
+    border-color: var(--acento);
+    color: var(--negro);
+    transform: scale(1.02); /* ANIMACIÓN: scale */
+}
+
+
+/* ============================================================
+   14. NOSOTROS — CSS GRID Y FLEXBOX
+   ============================================================ */
+
+/* === CSS GRID en historia (2 columnas) === */
+.historia {
+    max-width: 1200px;
+    margin: 72px auto;
+    padding: 0 24px;
+
+    /* CSS GRID */
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* 2 columnas: texto e imagen */
+    gap: 48px;
+    align-items: center;             /* Centra verticalmente */
+}
+
+.historia-texto h3 {
+    font-family: var(--font-primary); /* FUENTE PRIMARIA */
+    font-size: 36px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--blanco);
+    margin-bottom: 16px;
+}
+.historia-texto h3 span { color: var(--acento); }
+.historia-texto p { color: var(--muted); font-size: 15px; line-height: 1.8; margin-bottom: 12px; }
+
+/* FLEXBOX en el panel de estadísticas */
+.historia-visual {
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    padding: 40px;
+    /* FLEXBOX */
+    display: flex;
+    flex-direction: column;  /* Apila los stats verticalmente */
+    gap: 24px;
+    /* ANIMACIÓN: transition en hover */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.historia-visual:hover {
+    border-color: var(--acento);
+    box-shadow: 0 0 40px rgba(0, 212, 255, 0.08);
+}
+
+/* FLEXBOX en cada stat */
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.stat-num {
+    font-family: var(--font-primary); /* FUENTE PRIMARIA */
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--acento);
+    line-height: 1;
+    min-width: 80px;
+}
+.stat-label strong { display: block; font-size: 14px; color: var(--blanco); }
+.stat-label span   { font-size: 12px; color: var(--muted); }
+.stat-divider      { height: 1px; background: var(--borde); }
+
+/* === CSS GRID en misión/visión/valores (3 columnas) === */
+.mvv {
+    background: var(--panel);
+    border-top: 1px solid var(--borde);
+    border-bottom: 1px solid var(--borde);
+    padding: 72px 24px;
+}
+.mvv-inner { max-width: 1200px; margin: 0 auto; }
+
+.mvv-grid {
+    /* CSS GRID */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* 3 columnas iguales */
+    gap: 24px;
+    margin-top: 40px;
+
+    /* ALINEACIONES DE GRID */
+    justify-items: stretch;
+    align-items: start;
+}
+
+.mvv-card {
+    background: var(--oscuro);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 32px 24px;
+    /* ANIMACIÓN: transition en tarjeta MVV */
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.mvv-card:hover {
+    border-color: var(--acento);
+    transform: translateY(-4px); /* ANIMACIÓN */
+}
+
+.mvv-icono {
+    width: 52px;
+    height: 52px;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 12px;
+    /* FLEXBOX */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    /* ANIMACIÓN */
+    transition: background 0.25s ease, transform 0.3s ease;
+}
+.mvv-card:hover .mvv-icono {
+    background: rgba(0, 212, 255, 0.2);
+    transform: rotate(10deg) scale(1.1); /* ANIMACIÓN: rotate + scale */
+}
+
+.mvv-icono i { font-size: 22px; color: var(--acento); }
+.mvv-card h4 {
+    font-family: var(--font-primary); /* FUENTE PRIMARIA */
+    font-size: 22px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--blanco);
+    margin-bottom: 12px;
+}
+.mvv-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* Video */
+.video-section { max-width: 1200px; margin: 72px auto; padding: 0 24px; }
+.video-wrapper {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--borde);
+    aspect-ratio: 16/9;
+    margin-top: 32px;
+}
+.video-wrapper iframe { width: 100%; height: 100%; display: block; }
+
+/* === CSS GRID en el equipo (4 columnas) === */
+.equipo-section {
+    background: var(--panel);
+    border-top: 1px solid var(--borde);
+    border-bottom: 1px solid var(--borde);
+    padding: 72px 24px;
+}
+.equipo-inner { max-width: 1200px; margin: 0 auto; }
+
+.equipo-grid {
+    /* CSS GRID */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.miembro-card {
+    background: var(--oscuro);
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    padding: 28px 20px;
+    text-align: center;
+    /* ANIMACIÓN */
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.miembro-card:hover {
+    border-color: var(--acento);
+    transform: translateY(-4px); /* ANIMACIÓN */
+}
+
+.miembro-foto {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--acento);
+    margin: 0 auto 16px;
+    display: block;
+    background: var(--panel);
+    /* ANIMACIÓN: transition en foto */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.miembro-card:hover .miembro-foto {
+    transform: scale(1.08); /* ANIMACIÓN: scale en hover */
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.miembro-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid var(--acento);
+    margin: 0 auto 16px;
+    background: rgba(0, 212, 255, 0.1);
+    /* FLEXBOX */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* ANIMACIÓN */
+    transition: transform 0.3s ease;
+}
+.miembro-card:hover .miembro-avatar { transform: scale(1.08); }
+.miembro-avatar i { font-size: 36px; color: var(--acento); }
+
+.miembro-card h4    { font-size: 15px; font-weight: 600; color: var(--blanco); margin-bottom: 4px; }
+.miembro-rol        { font-size: 12px; color: var(--acento); font-weight: 600; margin-bottom: 8px; display: block; }
+.miembro-carrera    { font-size: 12px; color: var(--muted); }
+
+/* === CSS GRID en "por qué elegirnos" (4 columnas) === */
+.por-que { max-width: 1200px; margin: 72px auto; padding: 0 24px; }
+
+.por-que-grid {
+    /* CSS GRID */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.pq-item {
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 28px 20px;
+    text-align: center;
+    /* ANIMACIÓN */
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.pq-item:hover {
+    border-color: var(--acento);
+    transform: translateY(-3px); /* ANIMACIÓN */
+}
+.pq-item i      { font-size: 28px; color: var(--acento); margin-bottom: 14px; display: block;
+                   transition: transform 0.3s ease; }
+.pq-item:hover i { transform: scale(1.2) rotate(5deg); } /* ANIMACIÓN: scale + rotate */
+.pq-item strong { display: block; font-size: 14px; color: var(--blanco); margin-bottom: 6px; }
+.pq-item p      { font-size: 13px; color: var(--muted); }
+
+
+/* ============================================================
+   15. CONTACTO — CSS GRID Y FLEXBOX
+   ============================================================ */
+.contacto-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px 72px;
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+}
+.contacto-seccion { display: flex; flex-direction: column; }
+
+/* FLEXBOX en card de sugerencias */
+.sugerencias-card {
+    display: flex;              /* FLEXBOX: panel lateral + formulario */
+    overflow: hidden;
+    background: var(--panel);
+    border-radius: 12px;
+    border: 1px solid var(--borde);
+}
+
+.sug-info-panel {
+    background: var(--oscuro);
+    padding: 2rem 1.5rem;
+    /* FLEXBOX: columna vertical */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    min-width: 220px;
+    border-right: 1px solid var(--borde);
+}
+
+.sug-info-item { display: flex; align-items: flex-start; gap: 0.8rem; }
+.sug-icon      { font-size: 1.3rem; margin-top: 2px; color: var(--acento); }
+.sug-info-item strong { display: block; font-size: 0.9rem; color: var(--blanco); }
+.sug-info-item p      { font-size: 0.78rem; color: var(--muted); margin: 2px 0 0; line-height: 1.4; }
+
+.sug-form-panel { background: var(--panel); padding: 2rem 1.8rem; flex: 1; }
+.sug-form-panel h2 { color: var(--acento); margin: 0 0 0.2rem; font-size: 1.4rem; }
+.sug-form-panel p  { color: var(--muted); font-size: 0.85rem; margin: 0 0 1rem; }
+
+/* === CSS GRID en el formulario (2 columnas) === */
+.form-fila {
+    /* CSS GRID */
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* 2 campos por fila */
+    gap: 0 12px;
+}
+
+/* FLEXBOX en título de grupo de formulario */
+.form-grupo-titulo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 24px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--borde);
+}
+.form-grupo-titulo i  { color: var(--acento); font-size: 16px; }
+.form-grupo-titulo h3 { font-size: 15px; font-weight: 600; color: var(--blanco); }
+
+/* Inputs del formulario */
+.animated-form input,
+.animated-form textarea,
+.animated-form select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid var(--borde);
+    border-radius: 5px;
+    background: var(--oscuro);
+    color: var(--texto);
+    /* ANIMACIÓN: transition en campos del formulario */
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+.animated-form input:focus,
+.animated-form textarea:focus {
+    border-color: var(--acento);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.2);
+    outline: none;
+    transform: translateY(-1px); /* ANIMACIÓN: sube levemente al enfocar */
+}
+
+/* Botón enviar */
+.btn-enviar {
+    background: var(--acento);
+    color: var(--negro);
+    padding: 12px 30px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-top: 8px;
+    /* ANIMACIÓN: transition en botón enviar */
+    transition: background 0.3s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn-enviar:hover {
+    background: var(--acento2);
+    color: var(--blanco);
+    transform: scale(1.02); /* ANIMACIÓN: scale */
+}
+
+
+/* ============================================================
+   16. UBICACIÓN — CSS GRID
+   ============================================================ */
+.ubicacion-wrapper { max-width: 1200px; margin: 48px auto 72px; padding: 0 24px; }
+
+/* === CSS GRID en ubicación (mapa + info) === */
+.ubicacion-grid {
+    /* CSS GRID */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: stretch;
+}
+
+.map-container {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--borde);
+    min-height: 500px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* ANIMACIÓN */
+    transition: border-color 0.3s ease;
+}
+
+.map-container iframe {
+    flex: 1;
+    width: 100%;
+    min-height: 500px;
+    display: block;
+}
+.map-container:hover { border-color: var(--acento); }
+
+/* FLEXBOX en la información de ubicación */
+.ubicacion-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.ubicacion-titulo {
+    font-family: var(--font-primary); /* FUENTE PRIMARIA */
+    font-size: 28px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--blanco);
+    margin-bottom: 24px;
+}
+.ubicacion-titulo span { color: var(--acento); }
+
+/* FLEXBOX en los detalles de dirección */
+.direccion-detalles {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* === CSS GRID dentro de cada tarjeta de detalle === */
+.detalle-card {
+    /* CSS GRID */
+    display: grid;
+    grid-template-columns: 40px 1fr;  /* Ícono + texto */
+    align-items: center;
+    gap: 0 12px;
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 16px 20px;
+    /* ANIMACIÓN */
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.detalle-card:hover {
+    border-color: var(--acento);
+    transform: translateX(4px); /* ANIMACIÓN: desliza hacia la derecha */
+}
+.detalle-card i {
+    font-size: 20px;
+    color: var(--acento);
+    text-align: center;
+    justify-self: center;      /* ALINEACIÓN GRID INDIVIDUAL */
+}
+.detalle-card div  { display: flex; flex-direction: column; gap: 2px; }
+.detalle-card h4   { font-size: 13px; font-weight: 700; color: var(--blanco); margin: 0; }
+.detalle-card p    { font-size: 13px; color: var(--muted); line-height: 1.4; margin: 0; }
+
+
+/* ============================================================
+   17. FAQ — FLEXBOX
+   ============================================================ */
+.faq-wrapper {
+    max-width: 800px;
+    margin: 48px auto 72px;
+    padding: 0 24px;
+    /* FLEXBOX */
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* FLEXBOX en el título de cada categoría FAQ */
+.faq-categoria-titulo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--borde);
+}
+.faq-categoria-titulo i  { font-size: 18px; color: var(--acento); }
+.faq-categoria-titulo h3 {
+    font-family: var(--font-primary); /* FUENTE PRIMARIA */
+    font-size: 22px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--blanco);
+}
+
+/* FLEXBOX en la lista de FAQ */
+.faq-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.faq-item {
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    overflow: hidden;
+    /* ANIMACIÓN */
+    transition: border-color 0.2s ease;
+}
+.faq-item:hover     { border-color: var(--acento); }
+.faq-item[open]     { border-color: var(--acento); }
+
+.faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    list-style: none;
+    gap: 12px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary span { font-size: 15px; font-weight: 600; color: var(--blanco); }
+
+.faq-chevron {
+    font-size: 12px;
+    color: var(--muted);
+    flex-shrink: 0;
+    /* ANIMACIÓN: rotación del chevron al abrir FAQ */
+    transition: transform 0.3s ease, color 0.2s ease;
+}
+.faq-item[open] .faq-chevron {
+    transform: rotate(180deg); /* ANIMACIÓN: rotate en FAQ abierto */
+    color: var(--acento);
+}
+
+.faq-item p {
+    padding: 14px 20px 16px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    border-top: 1px solid var(--borde);
+    margin: 0;
+}
+
+/* FLEXBOX en el banner de contacto FAQ */
+.faq-contacto-banner {
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.faq-banner-texto { display: flex; align-items: center; gap: 16px; }
+.faq-banner-texto i      { font-size: 28px; color: var(--acento); flex-shrink: 0; }
+.faq-banner-texto strong { display: block; font-size: 15px; color: var(--blanco); margin-bottom: 2px; }
+.faq-banner-texto p      { font-size: 13px; color: var(--muted); margin: 0; }
+
+
+/* ============================================================
+   18. CARRITO — CSS GRID
+   ============================================================ */
+
+/* === CSS GRID en el layout del carrito ===
+   Columna principal (lista) + columna de resumen */
+.carrito-wrapper {
+    max-width: 1200px;
+    margin: 48px auto 72px;
+    padding: 0 24px;
+
+    /* CSS GRID */
+    display: grid;
+    grid-template-columns: 1fr 380px;  /* Lista ancha + resumen fijo */
+    gap: 32px;
+    align-items: start;
+}
+
+/* FLEXBOX en el encabezado del carrito */
+.carrito-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.carrito-titulo {
+    font-family: var(--font-primary); /* FUENTE PRIMARIA */
+    font-size: 22px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--blanco);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.carrito-titulo i { color: var(--acento); }
+
+/* Estado vacío del carrito */
+.carrito-vacio {
+    background: var(--panel);
+    border: 1px dashed var(--borde);
+    border-radius: 12px;
+    padding: 56px 24px;
+    text-align: center;
+    /* FLEXBOX */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+.carrito-vacio i  { font-size: 48px; color: var(--borde); }
+.carrito-vacio h4 { font-size: 18px; color: var(--blanco); }
+.carrito-vacio p  { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+
+/* === CSS GRID en cada item del carrito === */
+.item-carrito {
+    /* CSS GRID */
+    display: grid;
+    grid-template-columns: 80px 1fr auto auto 32px;
+    align-items: center;
+    gap: 16px;
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    /* ANIMACIÓN */
+    transition: border-color 0.2s ease;
+}
+.item-carrito:hover { border-color: var(--acento); }
+
+.item-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #0f1115;
+    flex-shrink: 0;
+}
+.item-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.item-info h4       { font-size: 14px; font-weight: 600; color: var(--blanco); margin-bottom: 4px; }
+.item-marca         { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.item-precio-unit   { font-size: 13px; color: var(--acento); font-weight: 600; }
+
+/* FLEXBOX en los controles de cantidad */
+.item-cantidad {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--oscuro);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+.item-cantidad span { font-size: 14px; font-weight: 600; color: var(--blanco); min-width: 20px; text-align: center; }
+
+.btn-cantidad {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 11px;
+    padding: 4px;
+    /* ANIMACIÓN */
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+.btn-cantidad:hover { color: var(--acento); }
+
+.item-subtotal p    { font-size: 15px; font-weight: 700; color: var(--blanco); white-space: nowrap; }
+
+.btn-eliminar-item {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px;
+    /* ANIMACIÓN */
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+.btn-eliminar-item:hover {
+    color: var(--accent-color);
+    transform: scale(1.2); /* ANIMACIÓN: agrandar el botón eliminar */
+}
+
+/* FLEXBOX en el resumen del carrito */
+.carrito-resumen {
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    padding: 28px;
+    position: sticky;
+    top: 80px;
+    /* FLEXBOX */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.resumen-lineas { display: flex; flex-direction: column; gap: 12px; }
+.resumen-linea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: var(--muted);
+}
+.envio-gratis   { color: var(--acento); font-weight: 600; }
+.envio-nota     { font-size: 12px; color: var(--muted); justify-content: flex-start; gap: 6px; }
+.envio-nota i   { color: var(--acento); font-size: 11px; }
+.resumen-divider { height: 1px; background: var(--borde); }
+.resumen-total  { font-size: 18px; font-weight: 700; color: var(--blanco); }
+.resumen-total span:last-child { color: var(--acento); }
+
+.btn-finalizar { width: 100%; justify-content: center; }
+.btn-seguir    { width: 100%; justify-content: center; text-align: center; }
+
+/* FLEXBOX en la sección de seguridad */
+.resumen-seguridad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    padding-top: 4px;
+}
+.resumen-seguridad i { color: var(--acento); }
+
+/* Botones del carrito */
+.btn-vaciar {
+    background: var(--muted);
+    color: var(--blanco);
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 10px;
+    cursor: pointer;
+    /* ANIMACIÓN */
+    transition: background 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn-vaciar:hover { background: var(--accent-color); }
+
+
+/* ============================================================
+   19. GRID DEMO — SECCIÓN EXTRA CON auto-fill vs auto-fit
+   Muestra de manera clara los conceptos de grid avanzado
+   ============================================================ */
+
+/* Sección de demostración de propiedades Grid */
+.grid-container {
+    /* CSS GRID con AUTO-FIT y MINMAX */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem 5%;
+}
+
+.product-card {
+    background: var(--panel);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--borde);
+    /* ANIMACIÓN */
+    transition: transform 0.3s ease, border-color 0.2s ease;
+    text-align: center;
+}
+.product-card:hover {
+    transform: translateY(-8px); /* ANIMACIÓN */
+    border-color: var(--acento);
+}
+.product-card button {
+    background: var(--acento);
+    color: var(--negro);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 700;
+    /* ANIMACIÓN */
+    transition: background 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.product-card button:hover { background: var(--acento2); color: var(--blanco); }
+
+
+/* ============================================================
+   ESTILOS HEREDADOS (para páginas que usan clases antiguas)
+   ============================================================ */
+.container  { padding: 2rem 10%; }
+.form-section {
+    background: var(--panel);
+    margin-bottom: 2rem;
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--borde);
+}
+.formal-title {
+    font-family: var(--font-primary);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--blanco);
+    margin-bottom: 1.5rem;
+}
+.media-container {
+    margin: 2rem 0;
+    padding: 1rem;
+    background: var(--panel);
+    border-radius: 8px;
+    border: 1px solid var(--borde);
+}
+.flex-equipo {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 2rem;
+}
+.miembro {
+    text-align: center;
+    background: var(--panel);
+    padding: 1rem;
+    border-radius: 50%;
+    width: 200px;
+}
+.video-recurso { border-radius: 12px; border: 3px solid var(--acento); }
+
+.catalogo {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.titulo      { text-align: center; font-size: 15px; color: var(--blanco); }
+.descripcion { font-size: 13px; color: var(--muted); }
+.precio      { color: var(--acento); font-size: 16px; font-weight: bold; }
+
+.producto button {
+    padding: 7px;
+    width: 100%;
+    background-color: var(--acento);
+    color: var(--negro);
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+.producto button:hover { background-color: var(--acento2); color: var(--blanco); }
+
+
+/* ============================================================
+   20. MEDIA QUERIES — RESPONSIVE WEB DESIGN
+   Adaptación para celular, tablet y PC
+   BREAKPOINTS:
+   · PC/Desktop:  1200px+  (estilos base, sin media query)
+   · Tablet:      768px – 1100px
+   · Móvil:       480px – 767px
+   · Móvil pequeño: < 480px
+   ============================================================ */
+
+/* ── TABLET (max-width: 1100px) ── */
+@media (max-width: 1100px) {
+
+    /* GRID: catálogo pasa de 4 a 3 columnas */
+    .catalogo-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ── TABLET (max-width: 900px) ── */
+@media (max-width: 900px) {
+
+    /* GRID: hero pasa a 1 columna (imagen debajo del texto) */
+    #hero {
+        grid-template-columns: 1fr;       /* 1 columna en tablet */
+        padding: 48px 24px;
+    }
+
+    /* GRID: historia de Nosotros pasa a 1 columna */
+    .historia {
+        grid-template-columns: 1fr;
+    }
+
+    /* GRID: misión/visión/valores pasa a 1 columna */
+    .mvv-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* GRID: equipo pasa de 4 a 2 columnas */
+    .equipo-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* GRID: "por qué" pasa de 4 a 2 columnas */
+    .por-que-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* GRID: ubicación pasa a 1 columna (mapa arriba, info abajo) */
+    .ubicacion-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* GRID: beneficios pasa de 4 a 2 columnas */
+    .beneficios-inner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .beneficio-item:nth-child(2) { border-right: none; }
+
+    /* GRID: carrito pasa a 1 columna */
+    .carrito-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .carrito-resumen { position: static; }
+
+    /* El mapa de ubicación tiene altura fija */
+    .map-container { height: 350px; min-height: 350px; }
+
+    /* FLEXBOX: sugerencias de contacto se apilan verticalmente */
+    .sugerencias-card { flex-direction: column; }
+    .sug-info-panel   { border-right: none; border-bottom: 1px solid var(--borde); min-width: unset; }
+}
+
+/* ── TABLET PEQUEÑA / MÓVIL (max-width: 768px) ── */
+@media (max-width: 768px) {
+
+    /* NAVBAR: oculta links del menú, solo muestra logo y carrito */
+    .nav-links { display: none; }
+
+    /* NAVBAR: logo más pequeño */
+    .logo h1 { font-size: 22px; }
+
+    /* GRID: catálogo pasa a 2 columnas */
+    .catalogo-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Los filtros dejan de ser sticky en móvil */
+    .filtros-wrapper { position: static; }
+
+    /* GRID: formulario de contacto pasa a 1 columna */
+    .form-fila {
+        grid-template-columns: 1fr;
+    }
+
+    /* Títulos de sección más pequeños */
+    .seccion-titulo { font-size: 28px; }
+
+    /* FLEXBOX: banner promo se apila verticalmente */
+    .banner-promo-inner {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 24px;
+    }
+}
+
+/* ── MÓVIL (max-width: 600px) ── */
+@media (max-width: 600px) {
+
+    /* GRID: equipo pasa a 2 columnas pequeñas */
+    .equipo-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* GRID: "por qué" pasa a 1 columna */
+    .por-que-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* GRID: beneficios pasa a 1 columna */
+    .beneficios-inner {
+        grid-template-columns: 1fr;
+    }
+    .beneficio-item { border-right: none; border-bottom: 1px solid var(--borde); }
+    .beneficio-item:last-child { border-bottom: none; }
+
+    /* FAQ: banner se apila verticalmente */
+    .faq-contacto-banner { flex-direction: column; text-align: center; }
+    .faq-banner-texto    { flex-direction: column; }
+
+    /* GRID: item del carrito se reorganiza en móvil */
+    .item-carrito {
+        grid-template-columns: 60px 1fr 32px;
+        grid-template-rows: auto auto;
+    }
+    .item-cantidad     { grid-column: 2; }
+    .item-subtotal     { grid-column: 2; }
+    .btn-eliminar-item { grid-row: 1; grid-column: 3; }
+}
+
+/* ── MÓVIL PEQUEÑO (max-width: 480px) ── */
+@media (max-width: 480px) {
+
+    /* GRID: catálogo pasa a 1 columna */
+    .catalogo-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* El ticker se hace más pequeño */
+    .barra-anuncio { font-size: 11px; }
+
+    /* Padding reducido en hero */
+    #hero { padding: 32px 16px; }
+
+    /* El promo-texto más compacto */
+    .promo-texto h3 { font-size: 28px; }
+}
+
+/* ============================================================
+   FIN DE estilos.css — CompuCero
+   ============================================================ */
+
+
+/* ============================================================
+   MEJORAS RESPONSIVE GLOBALES
+   ============================================================ */
+
+/* Evita desbordes horizontales */
+html, body {
+    overflow-x: hidden;
+}
+
+/* Imágenes y contenedores flexibles */
+img, iframe, video {
+    max-width: 100%;
+    height: auto;
+}
+
+.container,
+.hero-container,
+.navbar,
+.footer-container,
+.contacto-container,
+.nosotros-container,
+.productos-container {
+    width: 100%;
+    max-width: 1400px;
+}
+
+/* Tipografía fluida */
+h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+}
+
+h2 {
+    font-size: clamp(1.7rem, 4vw, 3rem);
+}
+
+h3 {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+}
+
+p,
+li,
+a,
+button,
+input,
+textarea,
+select {
+    font-size: clamp(0.92rem, 1.8vw, 1rem);
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+
+    section {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    .hero-grid,
+    .nosotros-grid,
+    .contacto-grid,
+    .ubicacion-grid,
+    .footer-grid,
+    .banner-promo-inner {
+        grid-template-columns: 1fr !important;
+        flex-direction: column;
+    }
+
+    .hero-texto,
+    .hero-img,
+    .nosotros-texto,
+    .nosotros-img {
+        text-align: center;
+    }
+
+    .equipo-grid,
+    .productos-grid,
+    .catalogo-grid,
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .hero-texto h1,
+    .page-banner h1,
+    .nosotros-hero h1 {
+        font-size: clamp(2rem, 7vw, 3rem) !important;
+        line-height: 1.1;
+    }
+}
+
+/* Celulares */
+@media (max-width: 768px) {
+
+    body {
+        font-size: 15px;
+    }
+
+    section {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    .nav-container,
+    .navbar {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .hero-grid,
+    .contacto-grid,
+    .nosotros-grid,
+    .ubicacion-grid,
+    .footer-grid,
+    .form-fila,
+    .banner-promo-inner,
+    .sugerencias-card {
+        grid-template-columns: 1fr !important;
+        flex-direction: column !important;
+    }
+
+    .hero-texto,
+    .hero-img,
+    .nosotros-texto,
+    .nosotros-img,
+    .banner-promo-inner,
+    .footer-col {
+        text-align: center;
+    }
+
+    .hero-texto h1,
+    .page-banner h1,
+    .nosotros-hero h1,
+    .contacto-hero h1 {
+        font-size: clamp(1.8rem, 8vw, 2.5rem) !important;
+    }
+
+    .seccion-titulo,
+    .section-title {
+        font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    }
+
+    .equipo-grid,
+    .productos-grid,
+    .catalogo-grid,
+    .stats-grid,
+    .beneficios-inner {
+        grid-template-columns: 1fr !important;
+    }
+
+    .card,
+    .producto-card,
+    .team-card,
+    .beneficio-item {
+        width: 100%;
+    }
+
+    .btn,
+    button,
+    .btn-primario,
+    .btn-secundario {
+        width: 100%;
+        justify-content: center;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        width: 100%;
+    }
+}
+
+/* Celulares pequeños */
+@media (max-width: 480px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    .logo h1 {
+        font-size: 1.4rem !important;
+    }
+
+    .hero-texto h1,
+    .page-banner h1,
+    .nosotros-hero h1,
+    .contacto-hero h1 {
+        font-size: 1.8rem !important;
+    }
+
+    .hero-texto p,
+    .banner-promo p,
+    .nosotros-texto p {
+        font-size: 0.95rem !important;
+    }
+
+    .footer-social {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .item-carrito {
+        gap: 12px;
+    }
+}

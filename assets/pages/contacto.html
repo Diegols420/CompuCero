@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto — CompuCero</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="../css/estilos.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/5610/5610074.png">
+</head>
+
+<body>
+
+    <!-- TICKER -->
+    <div class="barra-anuncio">
+        <span class="ticker">
+            <i class="fa-solid fa-truck"></i> Delivery gratis por compras mayores a S/500 &nbsp;·&nbsp;
+            <i class="fa-solid fa-bag-shopping"></i> Visítanos en nuestras tiendas en Lima &nbsp;·&nbsp;
+            <i class="fa-solid fa-fire"></i> Ofertas especiales disponibles &nbsp;·&nbsp;
+            <i class="fa-solid fa-shield-halved"></i> Compra fácil y segura &nbsp;·&nbsp;
+        </span>
+    </div>
+
+    <!-- NAVBAR -->
+    <header id="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="../../index.html">
+                    <h1>Compu<span>Cero</span></h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="contacto.html" class="activo">Contacto</a></li>
+                <li><a href="ubicacion.html">Ubícanos</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+            <div class="cart-icon" onclick="window.location='carrito.html'">
+                <span id="cart-count">0</span>
+                <i class="fa-solid fa-cart-shopping"></i> Carrito
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <div class="page-hero animate__animated animate__fadeIn">
+            <h2>Contáctanos <span>aquí</span></h2>
+            <p>¿Tienes dudas, sugerencias o reclamos? Estamos para ayudarte.</p>
+        </div>
+
+        <div class="contacto-wrapper">
+
+            <!-- FORMULARIO DE SUGERENCIAS -->
+            <section class="contacto-seccion">
+                <h2 class="seccion-titulo">Envíanos un <span>mensaje</span></h2>
+                <p class="seccion-subtitulo">Responderemos a la brevedad posible</p>
+
+                <div class="sugerencias-card">
+
+                    <!-- PANEL IZQUIERDO — INFO -->
+                    <div class="sug-info-panel">
+                        <div class="sug-info-item">
+                            <i class="fa-solid fa-location-dot sug-icon"></i>
+                            <div>
+                                <strong>Dirección</strong>
+                                <p>CompuPlaza, Av. Garcilaso de la Vega (Wilson)</p>
+                                <p>Lima Centro, Lima</p>
+                            </div>
+                        </div>
+                        <div class="sug-info-item">
+                            <i class="fa-solid fa-phone sug-icon"></i>
+                            <div>
+                                <strong>Teléfono</strong>
+                                <p>(01) 548-1789</p>
+                                <p>+51 960 505 452</p>
+                            </div>
+                        </div>
+                        <div class="sug-info-item">
+                            <i class="fa-solid fa-envelope sug-icon"></i>
+                            <div>
+                                <strong>Correo</strong>
+                                <p>contacto@compucero.pe</p>
+                            </div>
+                        </div>
+                        <div class="sug-info-item">
+                            <i class="fa-solid fa-clock sug-icon"></i>
+                            <div>
+                                <strong>Horario</strong>
+                                <p>Lun – Sab: 9:00am – 7:00pm</p>
+                                <p>Dom: 10:00am – 2:00pm</p>
+                            </div>
+                        </div>
+                        <div class="sug-info-item">
+                            <i class="fa-brands fa-whatsapp sug-icon"></i>
+                            <div>
+                                <strong>WhatsApp</strong>
+                                <p>+51 960 505 452</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PANEL DERECHO — FORMULARIO -->
+                    <div class="sug-form-panel">
+                        <h3>Escríbenos</h3>
+                        <p>Consultas, sugerencias o cualquier duda sobre nuestros productos</p>
+                        <form id="form-sugerencias" class="animated-form">
+                            <input type="text" id="sug-nombre" placeholder="Nombre completo *" required>
+                            <input type="email" id="sug-email" placeholder="Correo electrónico *" required>
+                            <select id="sug-asunto">
+                                <option value="">Seleccionar asunto</option>
+                                <option value="consulta">Consulta general</option>
+                                <option value="soporte">Soporte técnico</option>
+                                <option value="sugerencia">Sugerencia</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                            <textarea id="sug-mensaje" placeholder="Escribe tu mensaje aquí..." rows="5"
+                                required></textarea>
+                            <button type="submit" class="btn-enviar">
+                                <i class="fa-solid fa-paper-plane"></i> Enviar mensaje
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- LIBRO DE RECLAMACIONES -->
+            <section class="contacto-seccion">
+                <h2 class="seccion-titulo">Libro de <span>reclamaciones</span></h2>
+                <p class="seccion-subtitulo">Conforme al Código de Protección y Defensa del Consumidor</p>
+
+                <div class="form-section">
+                    <form id="libro-reclamaciones" class="animated-form">
+
+                        <div class="form-grupo-titulo">
+                            <i class="fa-solid fa-user"></i>
+                            <h3>1. Identificación del consumidor</h3>
+                        </div>
+                        <div class="form-fila">
+                            <input type="text" id="rec-nombre" placeholder="Nombre completo *" required>
+                            <input type="text" id="rec-dni" placeholder="DNI / CE *" required>
+                        </div>
+                        <div class="form-fila">
+                            <input type="text" id="rec-domicilio" placeholder="Domicilio *" required>
+                            <input type="tel" id="rec-telefono" placeholder="Teléfono *" required>
+                        </div>
+                        <input type="email" id="rec-email" placeholder="Correo electrónico *" required>
+
+                        <div class="form-grupo-titulo">
+                            <i class="fa-solid fa-box"></i>
+                            <h3>2. Identificación del bien contratado</h3>
+                        </div>
+                        <div class="form-fila">
+                            <select id="rec-tipo-bien" required>
+                                <option value="">Tipo de bien *</option>
+                                <option value="producto">Producto</option>
+                                <option value="servicio">Servicio</option>
+                            </select>
+                            <input type="number" id="rec-monto" placeholder="Monto reclamado S/. *" min="0" step="0.01"
+                                required>
+                        </div>
+                        <input type="text" id="rec-descripcion" placeholder="Descripción del bien contratado *"
+                            required>
+
+                        <div class="form-grupo-titulo">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <h3>3. Detalle de la reclamación</h3>
+                        </div>
+                        <select id="rec-tipo-reclamo" required>
+                            <option value="">Tipo de reclamación *</option>
+                            <option value="reclamo">Reclamo (disconformidad con el producto o servicio)</option>
+                            <option value="queja">Queja (disconformidad con la atención)</option>
+                        </select>
+                        <textarea id="rec-detalle" placeholder="Detalle de tu reclamación *" rows="4"
+                            required></textarea>
+                        <textarea id="rec-pedido" placeholder="¿Qué solución solicitas? *" rows="3" required></textarea>
+
+                        <button type="submit" class="btn-enviar">
+                            <i class="fa-solid fa-file-signature"></i> Enviar reclamación
+                        </button>
+
+                    </form>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="main-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 CompuCero &nbsp;&middot;&nbsp; Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

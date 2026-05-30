@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Viewport meta: hace la página responsive en dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompuCero — Hardware en Lima</title>
+
+    <!-- FUENTES: Se importan 2 familias tipográficas distintas (requisito) -->
+    <!-- Fuente 1: Barlow Condensed — para títulos y logos -->
+    <!-- Fuente 2: Inter — para texto corrido y botones -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="assets/css/estilos.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/5610/5610074.png">
+</head>
+
+<body>
+
+    <!-- ════════════════════════════════════════════════════
+         TICKER / BARRA DE ANUNCIO
+         ANIMACIÓN: animation: ticker (se mueve de derecha a izquierda)
+         ════════════════════════════════════════════════════ -->
+    <div class="barra-anuncio">
+        <span class="ticker">
+            <!-- ANIMACIÓN CSS: @keyframes ticker con transform: translateX() -->
+            <i class="fa-solid fa-truck"></i> Delivery gratis por compras mayores a S/500 &nbsp;·&nbsp;
+            <i class="fa-solid fa-bag-shopping"></i> Visítanos en nuestras tiendas en Lima &nbsp;·&nbsp;
+            <i class="fa-solid fa-fire"></i> Ofertas especiales disponibles &nbsp;·&nbsp;
+            <i class="fa-solid fa-shield-halved"></i> Compra fácil y segura &nbsp;·&nbsp;
+            <i class="fa-solid fa-bolt"></i> Stock limitado en GPU RTX 5090 &nbsp;·&nbsp;
+        </span>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════
+         NAVBAR
+         FLEXBOX: display:flex, align-items:center, gap
+         ════════════════════════════════════════════════════ -->
+    <header id="main-header">
+        <!-- .navbar usa display:flex — ver estilos.css sección 06 -->
+        <nav class="navbar">
+            <!-- Logo con FUENTE PRIMARIA: Barlow Condensed -->
+            <div class="logo">
+                <a href="index.html">
+                    <h1>Compu<span>Cero</span></h1>
+                </a>
+            </div>
+            <!-- nav-links: display:flex, gap:8px -->
+            <ul class="nav-links">
+                <li><a href="index.html" class="activo">Inicio</a></li>
+                <li><a href="assets/pages/nosotros.html">Nosotros</a></li>
+                <li><a href="assets/pages/productos.html">Productos</a></li>
+                <li><a href="assets/pages/contacto.html">Contacto</a></li>
+                <li><a href="assets/pages/ubicacion.html">Ubícanos</a></li>
+                <li><a href="assets/pages/faq.html">FAQ</a></li>
+            </ul>
+            <!-- Carrito: display:flex, align-items:center -->
+            <div class="cart-icon" onclick="window.location='assets/pages/carrito.html'">
+                <span id="cart-count">0</span>
+                <i class="fa-solid fa-cart-shopping"></i> Carrito
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+
+        <!-- ════════════════════════════════════════════════
+             HERO
+             CSS GRID: grid-template-columns: 1fr 1fr
+             ANIMACIÓN: animate__fadeInLeft, animate__fadeInRight
+             ════════════════════════════════════════════════ -->
+        <section id="hero">
+            <!--
+                CSS GRID aplicado en #hero:
+                - display: grid
+                - grid-template-columns: 1fr 1fr  (2 columnas)
+                - gap: 48px
+                - align-items: center
+                Ver estilos.css → sección 07
+            -->
+
+            <!-- Columna izquierda del grid -->
+            <div class="hero-texto animate__animated animate__fadeInLeft">
+                <!-- FUENTE PRIMARIA: Barlow Condensed en h2 -->
+                <h2>
+                    Tu próximo PC
+                    <em>empieza aquí</em>
+                </h2>
+                <p>Componentes de hardware de alta gama en Lima, Perú. GPU, RAM, placas madre, fuentes y más.</p>
+                <!-- FLEXBOX: hero-botones usa display:flex, gap:12px -->
+                <div class="hero-botones">
+                    <a href="assets/pages/productos.html" class="btn-primario">
+                        <!-- ANIMACIÓN: transition + transform en hover del botón -->
+                        <i class="fa-solid fa-display"></i> Ver productos
+                    </a>
+                    <a href="assets/pages/nosotros.html" class="btn-secundario">
+                        <i class="fa-solid fa-circle-info"></i> Conoce CompuCero
+                    </a>
+                </div>
+            </div>
+
+            <!-- Columna derecha del grid -->
+            <div class="hero-imagen animate__animated animate__fadeInRight">
+                <!-- ANIMACIÓN: transform:scale(1.04) en hover de la imagen -->
+                <img src="assets/img/gpu-gigabyte-rtx5090-1.jpg" alt="RTX 5090 Gigabyte" />
+                <!-- ANIMACIÓN: animation:pulso (brilla continuamente) -->
+                <div class="hero-badge">
+                    <strong>RTX 5090</strong> Recién llegada · S/. 1,350.80
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════════
+             BENEFICIOS
+             CSS GRID: repeat(4, 1fr) — 4 columnas iguales
+             FLEXBOX dentro de cada beneficio
+             ════════════════════════════════════════════════ -->
+        <div class="beneficios">
+            <!--
+                .beneficios-inner usa CSS GRID:
+                - display: grid
+                - grid-template-columns: repeat(4, 1fr)
+                - justify-items: stretch
+                - align-items: center
+                Ver estilos.css → sección 08
+            -->
+            <div class="beneficios-inner">
+                <!-- Cada .beneficio-item usa display:flex para alinear ícono + texto -->
+                <div class="beneficio-item">
+                    <i class="fa-solid fa-truck-fast beneficio-icono"></i>
+                    <div class="beneficio-texto">
+                        <strong>Delivery gratis</strong>
+                        <span>En compras mayores a S/500</span>
+                    </div>
+                </div>
+                <div class="beneficio-item">
+                    <i class="fa-solid fa-lock beneficio-icono"></i>
+                    <div class="beneficio-texto">
+                        <strong>Compra segura</strong>
+                        <span>Pago protegido siempre</span>
+                    </div>
+                </div>
+                <div class="beneficio-item">
+                    <i class="fa-solid fa-screwdriver-wrench beneficio-icono"></i>
+                    <div class="beneficio-texto">
+                        <strong>Garantía incluida</strong>
+                        <span>Soporte técnico post-venta</span>
+                    </div>
+                </div>
+                <div class="beneficio-item">
+                    <i class="fa-solid fa-box beneficio-icono"></i>
+                    <div class="beneficio-texto">
+                        <strong>Stock disponible</strong>
+                        <span>Productos listos para envío</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════
+             CATEGORÍAS
+             CSS GRID con AUTO-FILL y MINMAX()
+             ════════════════════════════════════════════════ -->
+        <section class="categorias">
+            <h2 class="seccion-titulo">Explorar <span>categorías</span></h2>
+            <p class="seccion-subtitulo">Encuentra exactamente lo que necesitas para tu build</p>
+            <!--
+                .grid-categorias usa CSS GRID con AUTO-FILL:
+                - display: grid
+                - grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))
+                - AUTO-FILL: crea columnas vacías si hay espacio
+                - MINMAX(): mínimo 240px, máximo 1 fracción
+                - justify-items: stretch
+                - align-items: stretch
+                Ver estilos.css → sección 09
+            -->
+            <div class="grid-categorias">
+                <!-- ANIMACIÓN: cada .cat-card tiene transform:translateY en hover
+                     y el ícono tiene transform:rotate(15deg) -->
+                <a href="assets/pages/productos.html" class="cat-card">
+                    <div class="cat-icono"><i class="fa-solid fa-display"></i></div>
+                    <div class="cat-info">
+                        <strong>Tarjetas de video</strong>
+                        <span>RTX 5090 y más</span>
+                    </div>
+                </a>
+                <a href="assets/pages/productos.html" class="cat-card">
+                    <div class="cat-icono"><i class="fa-solid fa-plug"></i></div>
+                    <div class="cat-info">
+                        <strong>Fuentes de poder</strong>
+                        <span>600W · 750W · 850W</span>
+                    </div>
+                </a>
+                <a href="assets/pages/productos.html" class="cat-card">
+                    <div class="cat-icono"><i class="fa-solid fa-microchip"></i></div>
+                    <div class="cat-info">
+                        <strong>Placas madre</strong>
+                        <span>ASUS ROG STRIX B650</span>
+                    </div>
+                </a>
+                <a href="assets/pages/productos.html" class="cat-card">
+                    <div class="cat-icono"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="cat-info">
+                        <strong>Procesadores</strong>
+                        <span>Intel Core i7</span>
+                    </div>
+                </a>
+                <a href="assets/pages/productos.html" class="cat-card">
+                    <div class="cat-icono"><i class="fa-solid fa-memory"></i></div>
+                    <div class="cat-info">
+                        <strong>Memorias RAM</strong>
+                        <span>DDR4 y DDR5</span>
+                    </div>
+                </a>
+                <a href="assets/pages/productos.html" class="cat-card">
+                    <div class="cat-icono"><i class="fa-solid fa-computer-mouse"></i></div>
+                    <div class="cat-info">
+                        <strong>Periféricos</strong>
+                        <span>Monitor · Mouse · Teclado</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════════
+             MÁS VENDIDOS
+             CSS GRID con AUTO-FIT y MINMAX()
+             ANIMACIÓN: animation:aparecer con delay escalonado
+             ════════════════════════════════════════════════ -->
+        <section class="mas-vendidos">
+            <h2 class="seccion-titulo"><i class="fa-solid fa-fire"></i> Más <span>vendidos</span></h2>
+            <p class="seccion-subtitulo">Los favoritos de nuestros clientes este mes</p>
+            <!--
+                .contenedor-vendidos usa CSS GRID con AUTO-FIT:
+                - display: grid
+                - grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))
+                - AUTO-FIT: colapsa columnas vacías (distinto a auto-fill)
+                - justify-items: stretch
+                - align-items: start
+                Ver estilos.css → sección 10
+            -->
+            <div class="contenedor-vendidos">
+                <!-- ANIMACIÓN: aparecer con animation-delay escalonado (0s, 0.15s, 0.3s) -->
+                <article class="card-vendido">
+                    <div class="img-wrapper">
+                        <!-- ANIMACIÓN: transform:scale(1.06) en hover de la imagen -->
+                        <img src="assets/img/mouse-logitech-m90.jpg" alt="Mouse Logitech M90" />
+                    </div>
+                    <div class="card-body">
+                        <h3>Mouse Logitech M90</h3>
+                        <p class="precio">S/. 15.90</p>
+                        <!-- ANIMACIÓN: transform:scale(1.02) en hover del botón -->
+                        <button class="btn-carrito">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+                <article class="card-vendido">
+                    <div class="img-wrapper">
+                        <img src="assets/img/monitor-asus-tuf-curvo.jpg" alt="Monitor ASUS TUF Gaming Curvo" />
+                    </div>
+                    <div class="card-body">
+                        <h3>Monitor ASUS TUF Gaming</h3>
+                        <p class="precio">S/. 1,500.90</p>
+                        <button class="btn-carrito">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+
+                <article class="card-vendido">
+                    <div class="img-wrapper">
+                        <img src="assets/img/gpu-gigabyte-rtx5090-2.jpg" alt="RTX 5090 Gigabyte" />
+                    </div>
+                    <div class="card-body">
+                        <h3>GPU RTX 5090 Gigabyte</h3>
+                        <p class="precio">S/. 1,350.80</p>
+                        <button class="btn-carrito">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════════
+             BANNER PROMO
+             FLEXBOX: justify-content:space-between, align-items:center
+             ════════════════════════════════════════════════ -->
+        <div class="banner-promo">
+            <!--
+                .banner-promo-inner usa FLEXBOX:
+                - display: flex
+                - align-items: center
+                - justify-content: space-between
+                Ver estilos.css → sección 11
+            -->
+            <div class="banner-promo-inner">
+                <div class="promo-texto">
+                    <!-- FUENTE PRIMARIA: Barlow Condensed -->
+                    <h3>Delivery gratis <span>en Lima</span></h3>
+                    <p>En compras mayores a S/500 · Envío el mismo día hábil</p>
+                </div>
+                <a href="assets/pages/productos.html" class="btn-primario">
+                    <i class="fa-solid fa-truck-fast"></i> Aprovechar ahora
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ════════════════════════════════════════════════════
+         FOOTER
+         FLEXBOX: display:flex, justify-content:center
+         ════════════════════════════════════════════════════ -->
+    <footer id="main-footer">
+        <!-- .footer-bottom usa display:flex, justify-content:center -->
+        <div class="footer-bottom">
+            <p>&copy; 2026 CompuCero &nbsp;&middot;&nbsp; Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/app.js" type="module"></script>
+
+</body>
+
+</html>
